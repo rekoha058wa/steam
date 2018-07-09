@@ -4,18 +4,23 @@
   <title>マッチング画面</title>
   <head>
     <body>
-      <script LANGUAGE="JavaScript">
+      <h1><div id="output">マッチングするよー</div></h1>
+
+      <script LANGUAGE="JavaScript" type="text/javascript">
       let Mnumber;
 
       function mach(){
         Mnumber = randomv(2);
+        target = document.getElementById("output");
 
         //ランダムでアラート表示
         if(Mnumber == 0){
           alert("マッチングしろや！");
+          target.innerHTML = "マッチングしていると思った？";
         }
         if(Mnumber == 1){
           alert("マッチングだー！");
+          target.innerHTML = "マッチングしちゃった ミ☆";
         }
       }
 
