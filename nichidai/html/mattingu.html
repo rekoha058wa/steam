@@ -1,0 +1,30 @@
+<html>
+<head>
+  <meta http-equiv="content-type" charset="utf-8">
+  <title>マッチング画面</title>
+  <head>
+    <body>
+      <script LANGUAGE="JavaScript">
+      let Mnumber;
+
+      function mach(){
+        Mnumber = randomv(2);
+
+        //ランダムでアラート表示
+        if(Mnumber == 0){
+          alert("マッチングしろや！");
+        }
+        if(Mnumber == 1){
+          alert("マッチングだー！");
+        }
+      }
+
+      //ランダム処理
+      function randomv(num){
+	      return Math.floor(Math.random() * num);
+      }
+      </script>
+      <!--Button処理//-->
+     <form><input type="button" value="マッチング開始" onClick="mach()"></form>
+    </body>
+</html>
