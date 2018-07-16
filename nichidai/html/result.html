@@ -9,13 +9,19 @@
   }
 </style>
 </head>
-<body>
+<body onload="draw2()">
   <canvas id="canvas" width="640" height="480"></canvas>
     <script>
-      var canvas = document.getElementById("canvas");
+    let img = new Image();    //画像オブジェクト作成
+img.src = "../resources/img/tackle.jpg";  //写真のパスを指定する
+      let canvas = document.getElementById("canvas");
       // ここにコードを書いていきます
       function onClick(e) {
   location.href='title.html';
+}
+function draw2(){
+  let ctx = document.getElementById("canvas").getContext("2d");
+  ctx.drawImage(img,0,0,648,480);
 }
 canvas.addEventListener('click', onClick, false);
     </script>
