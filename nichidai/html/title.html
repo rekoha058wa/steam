@@ -3,8 +3,27 @@
   <meta charset="UTF=8">
   <title>迫真　アメフト部</title>
   <link rel="stylesheet" href="../css/title.css">
+  <style>
+  #canvas {
+    background: #666;
+  }
+</style>
 </head>
-<body>
+<body onload="draw2()">
+  <canvas id="canvas" width="640" height="480"></canvas>
+    <script>
+    let img = new Image();    //画像オブジェクト作成
+img.src = "../resources/img/画像/syutyu.jpg";  //写真のパスを指定する
+    let img2 = new Image();
+    img2.src ="../resources/img/画像/ball.png";
+      let canvas = document.getElementById("canvas");
+function draw2(){
+  let ctx = document.getElementById("canvas").getContext("2d");
+  ctx.drawImage(img,0,0,648,480);
+  ctx.drawImage(img2,0,0,648,480);
+}
+canvas.addEventListener('click', onClick, false);
+</script>
   <h1>
     迫真　アメフト部
   </h1>
