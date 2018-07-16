@@ -1,0 +1,31 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf8">
+<title>titletest</title>
+<style>
+
+</style>
+</head>
+<body>
+  <form id="form1">
+  	<button>送信</button>
+  </form>
+<script src="/socket.io/socket.io.js"></script>
+<script>
+window.onload = () => {
+	let socket = io();
+
+
+  document.querySelector("#form1").addEventListener("submit", (e)=>{
+    e.preventDefault();
+    socket.emit('matching', {sid: socket.id});
+  });
+
+  socket.on('matching', (msg)=>{
+    window.location.href = 'jyanken.html';
+	});
+}
+</script>
+</body>
+</html>

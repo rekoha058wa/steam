@@ -1,0 +1,51 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf8">
+<title>jyanken</title>
+<style>
+
+</style>
+</head>
+<body>
+  <form id="form1">
+  	<button>gu</button>
+  </form>
+  <form id="form2">
+  	<button>cho</button>
+  </form>
+  <form id="form3">
+  	<button>pa</button>
+  </form>
+<script src="/socket.io/socket.io.js"></script>
+<script>
+window.onload = () => {
+	let socket = io();
+  
+
+  document.querySelector("#form1").addEventListener("submit", (e)=>{
+    e.preventDefault();
+    socket.emit('jyanken', {sid: socket.id,te: 1});
+  });
+  document.querySelector("#form2").addEventListener("submit", (e)=>{
+    e.preventDefault();
+    socket.emit('jyanken', {sid: socket.id,te: 2});
+  });
+  document.querySelector("#form3").addEventListener("submit", (e)=>{
+    e.preventDefault();
+    socket.emit('jyanken', {sid: socket.id,te: 3});
+  });
+
+  socket.on('win', (msg)=>{
+    window.location.href = 'kati.html';
+	});
+  socket.on('lose', (msg)=>{
+    window.location.href = 'make.html';
+	});
+  socket.on('reset', (msg)=>{
+    //window.location.href = 'chat2.html';
+	});
+}
+</script>
+</body>
+</html>
