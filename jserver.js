@@ -30,7 +30,8 @@ http.listen(port, ()=>{
 // Socket.io
 //--------------------------------------
 var clientNum = 0;
-let array = new Array();
+var id1 = "aiueo";
+var id2 = "aiueo";
 var te1 = 0;
 var te2 = 0;
 
@@ -49,27 +50,19 @@ io.on('connection', (socket)=>{
 	  }
 	});
 
-	socket.on('touroku',(data)=>{
-		//clientNum++;
-		array.push(data.id);
-		console.log('id: ' +  data.sid);
-		console.log('id: ' +  array[0]);
-		//if(clientNum === 2){
-		//	io.emit('matching');
-		//	clientNum = 0;
-		//}
-	});
 
  //じゃんけん
 	socket.on('jyanken',(data)=>{
-		array.push(data.id);
-		console.log('id: ' +  data.sid + ' te: ' +  data.te);
-		console.log('id: ' +  array[0]);
-		if(array[0] === data.id){
+		//array.push(data.id);
+		//console.log('id: ' +  data.sid + ' te: ' +  data.te);
+		//console.log('id: ' +  array[0]);
+		if(id1 === "aiueo"){
+			id1 = data.sid;
 			te1 = data.te;
 			console.log('te1: ' +  data.te);
 		}
-		else{
+		else if(id2 === "aiueo"){
+			id2 = data.sid;
 			te2 = data.te;
 			console.log('te2: ' +  data.te);
 		}
@@ -77,25 +70,28 @@ io.on('connection', (socket)=>{
 			if(te1 === 1 && te2 === 2 ||
 				te1 === 2 && te2 === 3 ||
 				te1 === 3 && te2 === 1 ){
-					io.to(array[0]).emit('win');
-					io.to(array[1]).emit('lose');
+					io.to(id1).emit('win');
+					io.to(id2).emit('lose');
 			}
 			else if(te2 === 1 && te1 === 2 ||
 				te2 === 2 && te1 === 3 ||
 				te2 === 3 && te1 === 1 ){
-					io.to(array[1]).emit('win');
-					io.to(array[0]).emit('lose');
+					io.to(id2).emit('win');
+					io.to(id1).emit('lose');
 			}
 			else{
 					io.emit('reset');
-					array = new Array();
 			}
 			te1 = 0;
 			te2 = 0;
+			id1 = "aiueo";
+			id2 = "aiueo";
 		}
 
 	});
 
+
+  //以下テスト用
 	//チャットメッセージ
 	socket.on('chat message', (msg)=>{
 		io.emit('chat message', msg);
