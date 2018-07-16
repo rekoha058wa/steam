@@ -6,45 +6,30 @@
     <body>
       <h1><div id="output">マッチングするよー</div></h1>
 
-      <script src="/socket.io/socket.io.js">
-
-      </script>
-
       <script LANGUAGE="JavaScript" type="text/javascript">
+      let Mnumber;
 
       function mach(){
+        Mnumber = randomv(2);
         target = document.getElementById("output");
-        target.innerHTML = "マッチングしているYO!";
 
-        //サーバに送信(マッチング)
-        socket.emit('maching', {sid:socket.id, key:keycd});
-
-        document.getElementById("button1").style.display="none";
-        //location.href = "janken.html" ;
-      }
-
-
-      socket.on('maching', (data)=>{
-        // サーバからのイベントを受けた際の処理を記述
-        if( socket.id !== data.sid){
-          //じゃんけんに移動
-          location.href = "janken.html" ;
-        }
-
-        else if(socket.id == null) {
+        //ランダムでアラート表示
+        if(Mnumber == 0){
           alert("マッチングしろや！");
           target.innerHTML = "マッチングしていると思った？";
-          document.getElementById("button1").style.display="block";
         }
-      });
+        if(Mnumber == 1){
+          alert("マッチングだー！");
+          target.innerHTML = "マッチングしちゃった ミ☆";
+        }
+      }
 
       //ランダム処理
       function randomv(num){
 	      return Math.floor(Math.random() * num);
       }
       </script>
-
       <!--Button処理//-->
-     <div id="button1"><input type="button" value="マッチング開始" onClick="mach()"></div>
+     <form><input type="button" value="マッチング開始" onClick="mach()"></form>
     </body>
 </html>
