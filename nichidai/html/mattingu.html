@@ -2,57 +2,53 @@
 <head>
   <meta http-equiv="content-type" charset="utf-8">
   <title>マッチング画面</title>
+
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+      #gameWindow {
+          background-image: url(../resources/img/title_g1_2.jpg);
+      }
+  </style>
   <head>
     <body>
-      <!--
-      <canvas id="c1" width="640" height="480"></canvas>
-    -->
+      <section id="gameWindow">
+      </section>
 
       <h1><div id="output">マッチングするよー</div></h1>
+      <!--Button処理//-->
+        <form id="button1"><button>マッチング開始</button></from>
 
       <script src="/socket.io/socket.io.js">
       </script>
 
       <script LANGUAGE="JavaScript" type="text/javascript">
-      let socket = io();
-
-      function mach(){
-        target = document.getElementById("output");
-        target.innerHTML = "マッチングしているYO!";
-
-        //サーバに送信(マッチング)
-        socket.emit('maching', {sid:socket.id, key:keycd});
-
-        document.getElementById("button1").style.display="none";
-
-        //location.href = "janken.html" ;
-      }
-
-      socket.on('maching', (data)=>{
-        // サーバからのイベントを受けた際の処理を記述
-        if( socket.id !== data.sid){
-          //じゃんけんに移動
-          location.href = "janken.html" ;
-        }
-        else if(socket.id == null) {
-        //ランダムでアラート表示
-          alert("マッチングしろや！");
-          target.innerHTML = "マッチングしていると思った？";
-          document.getElementById("button1").style.display="block";
-      }
-    });
 
     window.onload = function(){
-      //draw();
-    }
+      let socket = io();
 
-    //function draw(){
-      //let ctx = $('c1').getContext('2d');
-      //let background = new Image();
-      //background.src = "../resources/img/title_g1_2.png";
-      //ctx.drawImage(background,0,0);
-    //}
+      document.querySelector("#button1").addEventListener("submit", (e)=>{
+        e.preventDefault();
+        //サーバに送信(マッチング)
+        socket.emit('matching', {sid:socket.id});
 
+        mach();
+      });
+
+      socket.on('matching', (data)=>{
+        // サーバからのイベントを受けた際の処理を記述
+        //じゃんけんに移動
+        window.location.href = "janken.html" ;
+
+    });
+  }
+
+
+  function mach(){
+    target = document.getElementById("output");
+    target.innerHTML = "マッチングしているYO!";
+    document.getElementById("button1").style.display="none";
+    //location.href = "janken.html" ;
+  }
 
       //ランダム処理
       function randomv(num){
@@ -65,8 +61,7 @@
       </script>
 
 
-      <!--Button処理//-->
-        <div id="button1"><input type="button" value="マッチング開始" onClick="mach()"></div>
+
      <!--<form><input type="button" value="マッチング開始" onClick="mach()"></form> -->
     </body>
 </html>
