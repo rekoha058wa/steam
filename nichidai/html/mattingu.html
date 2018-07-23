@@ -4,12 +4,18 @@
   <title>マッチング画面</title>
   <head>
     <body>
+      <!--
+      <canvas id="c1" width="640" height="480"></canvas>
+    -->
+
       <h1><div id="output">マッチングするよー</div></h1>
 
       <script src="/socket.io/socket.io.js">
       </script>
 
       <script LANGUAGE="JavaScript" type="text/javascript">
+      let socket = io();
+
       function mach(){
         target = document.getElementById("output");
         target.innerHTML = "マッチングしているYO!";
@@ -36,9 +42,25 @@
       }
     });
 
+    window.onload = function(){
+      //draw();
+    }
+
+    //function draw(){
+      //let ctx = $('c1').getContext('2d');
+      //let background = new Image();
+      //background.src = "../resources/img/title_g1_2.png";
+      //ctx.drawImage(background,0,0);
+    //}
+
+
       //ランダム処理
       function randomv(num){
 	      return Math.floor(Math.random() * num);
+      }
+
+      function $(id){
+      	return document.getElementById(id);
       }
       </script>
 
