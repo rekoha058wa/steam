@@ -29,6 +29,14 @@ app.get('/nichidai/resources/sound/:file', (req, res)=>{
 	res.sendFile(__dirname + '/nichidai/resources/sound/' +
 	req.params.file);
 });
+app.get('/nichidai/resources/sound/bgm/:file', (req, res)=>{
+	res.sendFile(__dirname + '/nichidai/resources/sound/bgm/' +
+	req.params.file);
+});
+app.get('/nichidai/resources/sound/se/:file', (req, res)=>{
+	res.sendFile(__dirname + '/nichidai/resources/sound/se/' +
+	req.params.file);
+});
 app.get('/nichidai/css/:file', (req, res)=>{
 	res.sendFile(__dirname + '/nichidai/css/' +
 	req.params.file);
