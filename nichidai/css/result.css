@@ -1,6 +1,10 @@
  p{
   font-size:26px;
-  color: #f00;
+  color: #000;
+  text-shadow: 2px  2px 5px red,
+              -2px  2px 5px red,
+               2px -2px 5px red,
+              -2px -2px 5px red;
 }
 
 body {
