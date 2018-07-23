@@ -10,9 +10,12 @@
                 background-image: url(../resources/img/ground.jpeg);
             }
         </style>
+        <audio src="../resources/sound/bgm/MainScene.mp3" autoplay loop></audio>
     </head>
 
     <body>
+        <!--<canvas id="canvas", width="720", height="540"></canvas>-->
+
         <section id="gameWindow">
             <section id="pagetopWindow">
                 <h1>勝負!</h1>
@@ -47,6 +50,10 @@
                         <li><form id="paper"><button id="pa">パー</button></form></li>
                     </ul>
                 </section>
+
+                <marquee id="amehuto" scrollamount="100" truespeed>
+                    <img src="../resources/img/american_football.png" width="125" height="125" />
+                </marquee>
 
             </section>
 
@@ -137,11 +144,23 @@
                 }
 
                 var t = setTimeout(update, 1000);
+                hitDraw();
             }
 
-            /*function hitDraw(){
-                ctx.drawImage("american_football.png", 0, 0, this.bw, this.bh, this.x, this.y, this.w, this.h);
-            }*/
+            function hitDraw(){
+                if(mgr.getTime() < 3){
+                    var amehuto = document.querySelector("#amehuto");
+                    amehuto.setAttribute("type", "visible");
+                    //amehuto.setAttribute("visibility", "visible");
+                    // scrollamount
+                }
+                else{
+                    var amehuto = document.querySelector("#amehuto");
+                    amehuto.setAttribute("type", "hidden");
+                }
+                //var ctx = $("canvas").getContext("2d");
+                //ctx.drawImage("../resources/img/american_football.png", 0, 0);
+            }
         </script>
     </body>
 </html>
