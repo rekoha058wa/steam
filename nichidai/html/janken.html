@@ -56,39 +56,31 @@
 
         <script src="/socket.io/socket.io.js"></script>
         <script>
-        class Manager{
-          constructor(){
-            this.isBattle = true;
-            this.timer = 0;
-          }
+            class Manager{
+              constructor(){
+                  this.isBattle = true;
+                  this.timer = 0;
+              }
 
-          getIsBattle(){
-            return this.isBattle;
-          }
+              getIsBattle(){
+                  return this.isBattle;
+              }
 
-          setIsBattle(isBattle){
-            this.isBattle = isBattle;
-          }
+              setIsBattle(isBattle){
+                  this.isBattle = isBattle;
+              }
 
-          getTime(){
-            return this.timer;
-          }
+              getTime(){
+                  return this.timer;
+              }
 
-          AddTime(){
-            this.timer++;
-          }
-        }
+              AddTime(){
+                  this.timer++;
+              }
+            }
 
             let mgr = new Manager();
-
-            if(mgr.getIsBattle() == true){
-                var gu = document.querySelector("#playerLayer").querySelector("#gu");
-                gu.setAttribute("disabled", "disabled");
-                var tyoki = document.querySelector("#playerLayer").querySelector("#tyoki");
-                tyoki.setAttribute("disabled", "disabled");
-                var pa = document.querySelector("#playerLayer").querySelector("#pa");
-                pa.setAttribute("disabled", "disabled");
-            }
+            let result = '';
 
             window.onload = () => {
                 let socket = io();
@@ -109,21 +101,47 @@
                 }
 
                 socket.on('win', (msg) => {
-                    //mgr.setIsBattle(false);
-                    if (mgr.getTime() > 10){
+                    mgr.setIsBattle(false);
+                    /*if (mgr.getTime() > 10){
                         window.location.href = 'InterviewScene.html';
-                    }
+                    }*/
+                    result = 'InterviewScene.html';
                 });
                 socket.on('lose', (msg) => {
-                    //mgr.setIsBattle(false);
-                    if (mgr.getTime() > 10){
+                    mgr.setIsBattle(false);
+                    /*if (mgr.getTime() > 10){
                         window.location.href = 'HospitalScene.html';
-                    }
+                    }*/
+                    result = 'HospitalScene.html';
                 });
                 socket.on('reset', (msg) => {
                     //window.location.href = 'chat2.html';
                 });
+
+                update();
             }
+
+            function update(){
+                if(mgr.getIsBattle() == false){
+                    var gu = document.querySelector("#playerLayer").querySelector("#gu");
+                    gu.setAttribute("disabled", "disabled");
+                    var tyoki = document.querySelector("#playerLayer").querySelector("#tyoki");
+                    tyoki.setAttribute("disabled", "disabled");
+                    var pa = document.querySelector("#playerLayer").querySelector("#pa");
+                    pa.setAttribute("disabled", "disabled");
+
+                    mgr.AddTime();
+                    if(mgr.getTime() >= 5){
+                        window.location.href = result;
+                    }
+                }
+
+                var t = setTimeout(update, 1000);
+            }
+
+            /*function hitDraw(){
+                ctx.drawImage("american_football.png", 0, 0, this.bw, this.bh, this.x, this.y, this.w, this.h);
+            }*/
         </script>
     </body>
 </html>
