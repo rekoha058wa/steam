@@ -1,7 +1,7 @@
 //--------------------------------------
 // モジュール読み込み
 //--------------------------------------
-const port = 3013;							//自分のポート番号に変更
+const port = 3005;							//自分のポート番号に変更
 const app  = require('express')();
 const http = require('http').Server(app);
 const io   = require('socket.io')(http);
@@ -11,8 +11,33 @@ const io   = require('socket.io')(http);
 //--------------------------------------
 //必要なページ分だけgetする
 app.get('/', (req, res)=>{
+	res.sendFile(__dirname + '/index.html');
+});
+app.get('/test.html', (req, res)=>{
 	res.sendFile(__dirname + '/test.html');
 });
+app.get('/nichidai/resources/img/:file', (req, res)=>{
+	res.sendFile(__dirname + '/nichidai/resources/img/' +
+	req.params.file);
+});
+// 日本語が入っていると読み込んでくれない
+/*app.get('/nichidai/resources/img/画像/:file', (req, res)=>{
+	res.sendFile(__dirname + '/nichidai/resources/img/画像/' +
+	req.params.file);
+});*/
+app.get('/nichidai/resources/sound/:file', (req, res)=>{
+	res.sendFile(__dirname + '/nichidai/resources/sound/' +
+	req.params.file);
+});
+app.get('/nichidai/css/:file', (req, res)=>{
+	res.sendFile(__dirname + '/nichidai/css/' +
+	req.params.file);
+});
+app.get('/nichidai/html/:file', (req, res)=>{
+	res.sendFile(__dirname + '/nichidai/html/' +
+	req.params.file);
+});
+
 app.get('/jyanken.html', (req, res)=>{
 	res.sendFile(__dirname + '/jyanken.html');
 });

@@ -1,12 +1,13 @@
+<!doctype html>
 <html>
     <head>
         <!--<meta charset="utf-8">-->
-        <meta charset="utl8">
-        <title>Ç∂Ç·ÇÒÇØÇÒ</title>
+        <meta charset="utf8">
+        <title>(„Çø„ÉÉ„ÇØ„É´„ÇíÊ±∫„ÇÅ„Å™„ÅÑ„Å®„Éª„Éª„Éª)</title>
         <link rel="stylesheet" href="../css/style.css">
         <style>
             #gameWindow {
-                background-image: url(../resources/img/title.png);
+                background-image: url(../resources/img/ground.jpeg);
             }
         </style>
     </head>
@@ -14,36 +15,36 @@
     <body>
         <section id="gameWindow">
             <section id="pagetopWindow">
-                <h1>èüïâÅI</h1>
+                <h1>ÂãùË≤†!</h1>
             </section>
 
             <section id="battleLayer">
                 <!--<ul>
-                <li><button>ÉOÅ[</button></li>
-                <li><button>É`ÉáÉL</button></li>
-                <li><button>ÉpÅ[</button></li>
+                <li><button>ÔøΩOÔøΩ[</button></li>
+                <li><button>ÔøΩ`ÔøΩÔøΩÔøΩL</button></li>
+                <li><button>ÔøΩpÔøΩ[</button></li>
             </ul>
 
             <ul>
-                <li><button>ÉOÅ[</button></li>
-                <li><button>É`ÉáÉL</button></li>
-                <li><button>ÉpÅ[</button></li>
+                <li><button>ÔøΩOÔøΩ[</button></li>
+                <li><button>ÔøΩ`ÔøΩÔøΩÔøΩL</button></li>
+                <li><button>ÔøΩpÔøΩ[</button></li>
             </ul>
                 -->
 
                 <section id="otherPlayerLayer">
                     <ul>
-                        <li><button>ÉOÅ[</button></li>
-                        <li><button>É`ÉáÉL</button></li>
-                        <li><button>ÉpÅ[</button></li>
+                        <li><button id="gu" disabled="disabled">„Ç∞„Éº</button></li>
+                        <li><button id="tyoki" disabled="disabled">„ÉÅ„Éß„Ç≠</button></li>
+                        <li><button id="pa" disabled="disabled">„Éë„Éº</button></li>
                     </ul>
                 </section>
 
                 <section id="playerLayer">
                     <ul>
-                        <li><button>ÉOÅ[</button></li>
-                        <li><button>É`ÉáÉL</button></li>
-                        <li><button>ÉpÅ[</button></li>
+                        <li><form id="rock"><button id="gu">„Ç∞„Éº</button></form></li>
+                        <li><form id="scissors"><button id="tyoki">„ÉÅ„Éß„Ç≠</button></form></li>
+                        <li><form id="paper"><button id="pa">„Éë„Éº</button></form></li>
                     </ul>
                 </section>
 
@@ -53,10 +54,76 @@
 
         </section>
 
+        <script src="/socket.io/socket.io.js"></script>
         <script>
+        class Manager{
+          constructor(){
+            this.isBattle = true;
+            this.timer = 0;
+          }
 
+          getIsBattle(){
+            return this.isBattle;
+          }
+
+          setIsBattle(isBattle){
+            this.isBattle = isBattle;
+          }
+
+          getTime(){
+            return this.timer;
+          }
+
+          AddTime(){
+            this.timer++;
+          }
+        }
+
+            let mgr = new Manager();
+
+            if(mgr.getIsBattle() == true){
+                var gu = document.querySelector("#playerLayer").querySelector("#gu");
+                gu.setAttribute("disabled", "disabled");
+                var tyoki = document.querySelector("#playerLayer").querySelector("#tyoki");
+                tyoki.setAttribute("disabled", "disabled");
+                var pa = document.querySelector("#playerLayer").querySelector("#pa");
+                pa.setAttribute("disabled", "disabled");
+            }
+
+            window.onload = () => {
+                let socket = io();
+
+                if(mgr.getIsBattle()){
+                  document.querySelector("#rock").addEventListener("submit", (e) => {
+                      e.preventDefault();
+                      socket.emit('jyanken', { sid: socket.id, te: 1 });
+                  });
+                  document.querySelector("#scissors").addEventListener("submit", (e) => {
+                      e.preventDefault();
+                      socket.emit('jyanken', { sid: socket.id, te: 2 });
+                  });
+                  document.querySelector("#paper").addEventListener("submit", (e) => {
+                      e.preventDefault();
+                      socket.emit('jyanken', { sid: socket.id, te: 3 });
+                  });
+                }
+
+                socket.on('win', (msg) => {
+                    //mgr.setIsBattle(false);
+                    if (mgr.getTime() > 10){
+                        window.location.href = 'InterviewScene.html';
+                    }
+                });
+                socket.on('lose', (msg) => {
+                    //mgr.setIsBattle(false);
+                    if (mgr.getTime() > 10){
+                        window.location.href = 'HospitalScene.html';
+                    }
+                });
+                socket.on('reset', (msg) => {
+                    //window.location.href = 'chat2.html';
+                });
+            }
         </script>
     </body>
-
-
 </html>

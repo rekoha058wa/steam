@@ -4,6 +4,8 @@
     height: 540px;
     text-align: center;
     background-image: url(../resources/img/default.png);
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 #pagetopWindow {
@@ -24,7 +26,7 @@
 #playerLayer {
     float: left;
     margin-top: 40px;
-    margin-left: 424px;
+    margin-left: 474px;
     height: 265px;
     border: 4px solid rgba(0, 100, 250, 0.95);
     background-color: rgba(150, 200, 250, 0.95);
@@ -35,17 +37,16 @@
         position: relative;
         right: 10px;
     }
-
-        #playerLayer > ul > li > button {
-            width: 100px;
-            height: 70px;
+        #playerLayer > ul > li > form > button {
+            width: 75px;
+            height: 75px;
             margin-bottom: 10px;
-            background-image: url(../resources/img/rock.png);
+            background-repeat: no-repeat;
             background-size: cover;
         }
 
-            #playerLayer > ul > li > button:hover {
-                background-color: rgb(128, 128, 128);
+            #playerLayer > ul > li > form > button:hover {
+                opacity: 0.8;
             }
 
 #otherPlayerLayer {
@@ -63,12 +64,23 @@
     }
 
         #otherPlayerLayer > ul > li > button {
-            width: 100px;
-            height: 70px;
+            width: 75px;
+            height: 75px;
             margin-bottom: 10px;
-            background-image: url(../resources/img/rock.png);
             background-size: cover;
         }
+
+#gu{
+    background-image: url(../resources/img/gu.png);
+}
+
+#tyoki{
+    background-image: url(../resources/img/tyoki.png);
+}
+
+#pa{
+    background-image: url(../resources/img/pa.png);
+}
 
 /*
 #buttonWindow{
@@ -76,17 +88,17 @@
 	z-index: 10;
 	top: 150px;
 	left: 35px;
-			
+
 	border: 5px solid rgb(255, 200, 0);
 	width: 650px;
 	height: 275px;
-			
+
 	padding: 5px;
 	text-align: left;
-			
+
 	background-color: rgb(230, 255, 0);
 }
-	
+
 #sendWindow{
 	position: absolute;
 	z-index: 10;
@@ -110,4 +122,3 @@
 	margin-bottom: 15px;
 	font-size: 20px;
 }*/
-
