@@ -11,9 +11,10 @@
 </head>
 <body onload="draw2()">
   <canvas id="canvas" width="640" height="480"></canvas>
+  <div id="content">
     <script>
     let img = new Image();    //画像オブジェクト作成
-img.src = "../resources/img/tackle.jpg";  //写真のパスを指定する
+img.src = "../resources/img/uchida.png";  //写真のパスを指定する
       let canvas = document.getElementById("canvas");
       // ここにコードを書いていきます
       function onClick(e) {
@@ -25,5 +26,20 @@ function draw2(){
 }
 canvas.addEventListener('click', onClick, false);
     </script>
+  </div>
+  <div id="rand">
+    <script>
+    let a=["あのタックルのシーンは後日ネットで初めて見た。これ本当なのかなと思った",
+    "信じてもらえないかもしれないが、私の指示ではない",
+    "どんな反則か、きちんと確認していなかった",
+    "こんな短期間で(アメフトが)なぜ嫌いになってしまうのか。なんでこんな選手がやめなきゃいけないのかと思います",
+    "そういう意味ではない。「つぶせ」と言ったのは事実。怪我をさせろ、という意味ではない",
+    "反則があった場合、直接相手の監督に電話する。部と部の行き来でやりとりすると思っていた",
+    "彼には辞めないでもらいたい。続けてもらいたい"];
+    let x;
+    x=Math.floor(Math.random()*7);
+    document.write(a[x]);
+    </script>
+  </div>
 </body>
 </html>
